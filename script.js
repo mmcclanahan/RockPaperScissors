@@ -17,23 +17,24 @@ function playRound(playerSelection, computerSelection) {
         console.log('You Lose! ' + c + ' beats ' + p);
         return 2;
     }
-    else console.log('It\'s a tie!');
+    else {
+        console.log('It\'s a tie!');
         return 0;
+    }
 }
 
 function game() {
     for (let i = 0; i < 5; i++) {
-        let playerSelection = prompt("Rock, Paper, or Scissors?")
-        let computerSelection = getComputerChoice()
-        let whoWon = playRound(playerSelection, computerSelection)
+        let playerSelection = prompt("Rock, Paper, or Scissors?");
+        let computerSelection = getComputerChoice();
+        let whoWon = playRound(playerSelection, computerSelection);
         if (whoWon == 1) wins++;
         else if (whoWon == 2) loss++;
         else continue;
-
     }
-    console.log('Final Score\nWins: ' + wins + '\nLosses: ' + loss)
+    console.log('Final Score\nWins: ' + wins + '\nLosses: ' + loss);
 }
-game()
+game();
 
 
 
