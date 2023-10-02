@@ -6,83 +6,75 @@ function getComputerChoice() {
     let choice = options[Math.floor(Math.random() * options.length)];
     return choice;
 }
+//play again button
+const playAgainBtn = document.createElement('button');
+        playAgainBtn.textContent = 'Play Again?';
+        playAgainBtn.id = 'playAgain';
 
-//get player choice
+//resultDiv contains results after each round
 const resultDiv = document.querySelector('#results')
 const resultDivv = document.querySelectorAll('#results')
-const btn = document.querySelectorAll('button');
 
+//player choice buttons
+const btn = document.querySelectorAll('button');
 btn.forEach(button => {
     button.addEventListener('click', () => {
         playRound(button.id);
     });
 });
 
-/*plays one round & prints the winner
-@param playerChoice button.id
-@return an integer 0 through 2 equating to outcome
-*/
 
-let count = 0;
+//match used later 
+let match = 0;
+//play a round till 5 point reached
 function playRound(buttonId) {
-    
     let p = buttonId;
     let c = getComputerChoice();
-    if (count <= 4){    
-    count++;
+    if (wins < 5 && losses < 5) {    
     if (p == 'rock' && c == 'scissors' || p == 'paper' && c == 'rock' || p == 'scissors' && c == 'paper') {
             
             let pWin = document.createElement('p')
-            pWin.textContent = 'You Win! ' + p + ' beats ' + c;
-            resultDiv.appendChild(pWin);
             wins++;
+            match++;
+            pWin.textContent = 'Round Win! ' + p + ' beats ' + c + '. Wins: ' + wins + ' Losses: ' + losses;
+            resultDiv.appendChild(pWin);
+            
         }
         else if (p == 'rock' && c == 'paper' || p == 'paper' && c == 'scissors' || p == 'scissors' && c == 'rock') {
-            let pLoss = document.createElement('p')
-            pLoss.textContent = 'You Lose! ' + c + ' beats ' + p;
-            resultDiv.appendChild(pLoss);
             losses++;
+            match++;
+            let pLoss = document.createElement('p')
+            pLoss.textContent = 'Round Loss! ' + p + ' beats ' + c + '. Wins: ' + wins + ' Losses: ' + losses;
+            resultDiv.appendChild(pLoss);
+            
         }
         else {
+            match++;
             let pTie = document.createElement('p')
-            pTie.textContent = 'It\'s a tie!';
+            pTie.textContent = 'It\'s a tie! Wins: ' + wins + ' Losses: ' + losses;
             resultDiv.appendChild(pTie);
         }
     }
-    else if (count == 5){
-        count++;
-        const playAgainBtn = document.createElement('button')
-        playAgainBtn.textContent = 'Play Again?'
+    if (wins == 5 || losses == 5){
         let winOrLoss = document.createElement('p');
         if(wins > losses) winOrLoss.textContent = 'Congratz! You Won!';
         else if (losses > wins) winOrLoss.textContent = 'Maybe Next Time!';
         else winOrLoss.textContent = 'A Tie!';
         let finalScore = document.createElement('p');
-        finalScore.textContent = 'Final Score\nWins: ' + wins + '\nLosses: ' + losses;
+        finalScore.textContent = 'Final Score...\nWins: ' + wins + '\nLosses: ' + losses;
         resultDiv.appendChild(winOrLoss);
         resultDiv.appendChild(finalScore);
         resultDiv.appendChild(playAgainBtn);
+        wins++;
+        losses++;
     }    
 }
-//while results div array is less than or equal to 4 keep playing
-//after the loop print the final score in the div and then clear the div
-/*
-function game() {
-    for (let i = 0; i < 5; i++) {
-        let playerChoice = getPlayerChoice();
-        let computerChoice = getComputerChoice();
-        let roundOutcome = playRound(playerChoice, computerChoice);
-        if (roundOutcome == 1) wins++;
-        else if (roundOutcome == 2) losses++;
-        else continue;
-    }
-    if (wins > losses) console.log('You Win!');
-    else if (wins == losses) console.log('It\'s a Tie!');
-    else console.log('You Lost!');
-    console.log('Final Score\nWins: ' + wins + '\nLosses: ' + losses);
-    
-}*/
-
-
-
+//play again button restarts game
+playAgainBtn.addEventListener('click', () => {
+        wins = 0;
+        losses = 0;
+        while (resultDiv.firstChild){
+            resultDiv.removeChild(resultDiv.lastChild);
+        }
+    })
 
