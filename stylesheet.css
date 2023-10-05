@@ -1,0 +1,30 @@
+body {
+    background-color: black;
+    color: white;
+}
+
+.header,
+#buttons {
+    display: flex;
+    justify-content: center;
+}
+
+#buttons {
+    margin-top: 300px;
+    gap: 200px;
+}
+
+.button {
+    padding: 50px;
+    
+    color: #FFFFFF;
+    background: #333333;
+    text-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #FF1F1F, 0 -18px 40px #FF9376;
+    box-shadow: 4px -4px 15px 0px #FF1F1F, 12px -11px 7px 0px #FF9376, 20px -5px 7px 0px #FFE264, 20px 6px 7px 0px #F6FF33, 13px 12px 17px 0px #FF9527, 2px 17px 17px 0px #FF0000, -9px 21px 18px 0px #FFF212, -9px 6px 11px 0px #FF0808, -11px -9px 11px 0px #FFFA17, -11px -9px 11px 0px #FFFA17, 8px 6px 30px 14px rgba(0,0,0,0.58);
+}
+#results {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px;
+}
