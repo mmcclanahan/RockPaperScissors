@@ -26,11 +26,16 @@ btn.forEach(button => {
 
 //match used later 
 let match = 0;
+const ready = document.createElement('p')
+ready.textContent = 'Good Luck!'
 //play a round till 5 point reached
 function playRound(buttonId) {
     let p = buttonId;
     let c = getComputerChoice();
-    if (wins < 5 && losses < 5) {    
+    if (wins < 5 && losses < 5) { 
+       while (resultDiv.firstChild){
+            resultDiv.removeChild(resultDiv.lastChild);
+        }
     if (p == 'rock' && c == 'scissors' || p == 'paper' && c == 'rock' || p == 'scissors' && c == 'paper') {
             
             let pWin = document.createElement('p')
@@ -49,7 +54,6 @@ function playRound(buttonId) {
             
         }
         else {
-            match++;
             let pTie = document.createElement('p')
             pTie.textContent = 'It\'s a tie! Wins: ' + wins + ' Losses: ' + losses;
             resultDiv.appendChild(pTie);
@@ -76,5 +80,5 @@ playAgainBtn.addEventListener('click', () => {
         while (resultDiv.firstChild){
             resultDiv.removeChild(resultDiv.lastChild);
         }
+        resultDiv.appendChild(ready);
     })
-
